@@ -9,36 +9,19 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsToMany(models.Artist, {
-        through: "MovieDirectors",
+      this.hasMany(models.Rent, {
         foreignKey: "movieId",
-        as: "directors",
-      });
-      this.belongsToMany(models.Artist, {
-        through: "MovieActors",
-        foreignKey: "movieId",
-        as: "actors",
-      });
-      this.belongsToMany(models.Genre, {
-        through: "MovieGenres",
-        foreignKey: "movieId",
-        as: "genres",
-      });
-      this.hasMany(models.Vote, {
-        foreignKey: "movieId",
-        as: "votes",
+        as: "rents",
       });
     }
   }
   Movie.init(
     {
       title: DataTypes.STRING,
-      originalTitle: DataTypes.STRING,
-      releaseDate: DataTypes.STRING,
-      overview: DataTypes.TEXT,
-      duration: DataTypes.INTEGER,
-      voteCount: DataTypes.DOUBLE,
-      voteAverage: DataTypes.DOUBLE,
+      director: DataTypes.STRING,
+      totalCopies: DataTypes.INTEGER,
+      currentCopies: DataTypes.INTEGER,
+      price: DataTypes.DOUBLE,
     },
     {
       sequelize,

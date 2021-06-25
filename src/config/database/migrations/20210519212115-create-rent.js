@@ -1,37 +1,41 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("MovieDirectors", {
+    await queryInterface.createTable("Rents", {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
       },
+      userId: {
+        type: Sequelize.UUID,
+      },
       movieId: {
         type: Sequelize.UUID,
-        allowNull: false,
         references: {
           model: "Movies",
           key: "id",
         },
       },
-      artistId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: "Artists",
-          key: "id",
-        },
+      devolutionPrice: {
+        type: Sequelize.DOUBLE,
+      },
+      deliveredDate: {
+        type: Sequelize.DATE,
+      },
+      devolutionDate: {
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
       },
       updatedAt: {
+        allowNull: false,
         type: Sequelize.DATE,
       },
     });
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable("MovieDirectors");
+    await queryInterface.dropTable("Votes");
   },
 };

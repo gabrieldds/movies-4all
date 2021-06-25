@@ -29,6 +29,7 @@ class UserService {
       throw new Error("user already exists!");
     }
     const hashedPassword = bcryt.hashSync(password);
+    console.log("here");
     const user = await this.userRepository.create({
       name,
       email,

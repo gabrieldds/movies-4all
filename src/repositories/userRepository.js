@@ -3,7 +3,7 @@ const { Op } = require("sequelize");
 
 class UserRepository {
   async create(data) {
-    const user = await User.create(data, { silent: true });
+    const user = await User.create(data, { silent: false });
     return user;
   }
 
@@ -31,7 +31,7 @@ class UserRepository {
   }
 
   async find(param = {}) {
-    param.deletedAt = null;
+    //param.deletedAt = null;
     const user = await User.findOne({
       where: param,
     });
@@ -49,7 +49,6 @@ class UserRepository {
         },
       }
     );
-    console.log(result);
     return result;
   }
 }

@@ -8,7 +8,7 @@ class MovieController {
 
   async create(request, response) {
     try {
-      const { title, overview, originalTitle, releaseDate, duration } =
+      const { title, director, totalCopies, currentCopies, price } =
         request.body;
       const movie = await this.movieService.create({
         title,
@@ -35,11 +35,9 @@ class MovieController {
 
   async find(request, response) {
     try {
-      const { title, actor, genre, director } = request.query;
+      const { title, director } = request.query;
       const movies = await this.movieService.find({
         title,
-        actor,
-        genre,
         director,
       });
       return response.json(movies);

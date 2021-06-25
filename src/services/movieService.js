@@ -1,19 +1,17 @@
-const { query } = require("express");
-
 class MovieService {
   constructor(movieRepository) {
     this.movieRepository = movieRepository;
   }
 
   async create(data) {
-    const { title, overview, originalTitle, releaseDate, duration } = data;
+    const { title, director, totalCopies, currentCopies, price } = data;
 
     const movie = await this.movieRepository.create({
       title,
-      overview,
-      originalTitle,
-      releaseDate,
-      duration,
+      director,
+      totalCopies,
+      currentCopies,
+      price,
     });
 
     return movie;
@@ -26,12 +24,9 @@ class MovieService {
 
   async find(params) {
     const query = {};
-    console.log(params);
-    const { title, actor, genre, director } = params;
+    const { title, director } = params;
     if (title) query["title"] = title;
-    if (actor) query["$actors.name$"] = actor;
     if (director) query["$directors.name$"] = director;
-    if (genre) query["$genres.name$"] = genre;
     const movies = await this.movieRepository.find(query);
     return movies;
   }

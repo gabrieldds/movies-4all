@@ -1,42 +1,38 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Movies", {
+    await queryInterface.createTable("Users", {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      title: {
+      name: {
         type: Sequelize.STRING,
       },
-      overview: {
-        type: Sequelize.TEXT,
-      },
-      originalTitle: {
+      password: {
         type: Sequelize.STRING,
       },
-      releaseDate: {
+      email: {
         type: Sequelize.STRING,
       },
-      duration: {
-        type: Sequelize.INTEGER,
-      },
-      voteCount: {
-        type: Sequelize.INTEGER,
-      },
-      voteAverage: {
-        type: Sequelize.DOUBLE,
+      role: {
+        type: Sequelize.ENUM("USER", "ADMIN"),
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
       },
       updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      deletedAt: {
+        allowNull: true,
         type: Sequelize.DATE,
       },
     });
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable("Movies");
+    await queryInterface.dropTable("Users");
   },
 };

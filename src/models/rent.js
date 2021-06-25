@@ -2,27 +2,29 @@ const { Model } = require("sequelize");
 const uuid = require("uuid").v4;
 
 module.exports = (sequelize, DataTypes) => {
-  class MovieGenre extends Model {
+  class Rent extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.Movie, { foreignKey: "movieId" });
-      this.belongsTo(models.Genre, { foreignKey: "genreId" });
+      this.belongsTo(models.Movie, { foreignKey: "movieId", as: "movie" });
     }
   }
-  MovieGenre.init(
+  Rent.init(
     {
+      userId: DataTypes.STRING,
       movieId: DataTypes.STRING,
-      genreId: DataTypes.STRING,
+      devolutionDate: DataTypes.DATE,
+      deliveredDate: DataTypes.DATE,
+      devolutionPrice: DataTypes.DOUBLE,
     },
     {
       sequelize,
-      modelName: "MovieGenre",
+      modelName: "Rent",
     }
   );
-  MovieGenre.beforeCreate((movieGenre) => (movieGenre.id = uuid()));
-  return MovieGenre;
+  Rent.beforeCreate((vote) => (vote.id = uuid()));
+  return Rent;
 };
